@@ -1,0 +1,28 @@
+{
+  "name": "tree-sitter-markdoc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bindings/node",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Mohit Singh <mohit@mohitsingh.in> (https://mohitsingh.in/)",
+  "license": "ISC",
+  "dependencies": {
+    "nan": "^2.17.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.7"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.md",
+      "file-types": [
+        "md"
+      ],
+      "injections": "queries/injections.scm",
+      "injection-regex": "markdoc"
+    }
+  ]
+}
