@@ -4,7 +4,7 @@
   "description": "",
   "main": "bindings/node",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tree-sitter test"
   },
   "keywords": [],
   "author": "Mohit Singh <mohit@mohitsingh.in> (https://mohitsingh.in/)",
