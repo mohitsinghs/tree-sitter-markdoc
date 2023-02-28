@@ -1,0 +1,134 @@
+===============
+Simple variable
+===============
+{% $foo %}
+---
+
+(content
+      (interpolation
+        (tag_start)
+        (variable
+          (variable_sigil)
+          (identifier))
+        (tag_end)))
+
+========================
+Multiple levels of depth
+========================
+{% $foo.bar.baz %}
+---
+
+(content
+      (interpolation
+        (tag_start)
+        (variable
+          (variable_sigil)
+          (identifier)
+          (variable_tail
+            (identifier))
+          (variable_tail
+            (identifier)))
+        (tag_end)))
+
+===========
+Array index
+===========
+{% $foo[1] %}
+---
+
+(content
+      (interpolation
+        (tag_start)
+        (variable
+          (variable_sigil)
+          (identifier)
+          (variable_tail
+            (variable_segment_value
+              (number))))
+        (tag_end)))
+
+======================
+Multiple array indexes
+======================
+{% $foo[1][2] %}
+---
+
+(content
+      (interpolation
+        (tag_start)
+        (variable
+          (variable_sigil)
+          (identifier)
+          (variable_tail
+            (variable_segment_value
+              (number)))
+          (variable_tail
+            (variable_segment_value
+              (number))))
+        (tag_end)))
+
+============================
+Array indexes and properties
+============================
+{% $foo[1].bar.baz[2].test %}
+---
+
+(content
+      (interpolation
+        (tag_start)
+        (variable
+          (variable_sigil)
+          (identifier)
+          (variable_tail
+            (variable_segment_value
+              (number)))
+          (variable_tail
+            (identifier))
+          (variable_tail
+            (identifier))
+          (variable_tail
+            (variable_segment_value
+              (number)))
+          (variable_tail
+            (identifier)))
+        (tag_end)))
+
+===================
+Invalid array index
+===================
+{% $foo[asdf] %}
+---
+
+(content
+      (interpolation
+        (tag_start)
+        (variable
+          (variable_sigil)
+          (identifier)
+          (variable_tail
+            (variable_segment_value
+              (variable
+                (variable_sigil
+                  (MISSING "$"))
+                (identifier)))))
+        (tag_end)))
+
+=================
+Invalid namespace
+=================
+{% $.foo:bar.baz %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (ERROR
+          (variable_sigil))
+        (attribute
+          (identifier))
+        (ERROR
+          (identifier))
+        (attribute
+          (identifier))
+        (tag_end)))
+

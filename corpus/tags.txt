@@ -1,0 +1,128 @@
+==================
+Simple opening tag
+==================
+{% foo %}
+---
+
+(content
+      (tag
+        (tag_start)
+        (tag_interior
+          (tag_open
+            (identifier)))
+        (tag_end)))
+
+===========================
+Opening tag with attributes
+===========================
+{% foo foo=1 bar=true %}
+---
+
+(content
+      (tag
+        (tag_start)
+        (tag_interior
+          (tag_open
+            (identifier)
+            (attribute
+              (identifier)
+              (value
+                (primitive
+                  (number))))
+            (attribute
+              (identifier)
+              (value
+                (primitive
+                  (boolean))))))
+        (tag_end)))
+
+================
+Self closing tag
+================
+{% foo /%}
+---
+
+(content
+    (tag
+      (tag_start)
+      (tag_interior
+        (tag_self_closing
+          (tag_open
+            (identifier))))
+      (tag_end)))
+
+================================
+Self closing tag with attributes
+================================
+{% foo foo=1 bar=true /%}
+---
+
+(content
+  (tag
+    (tag_start)
+    (tag_interior
+      (tag_self_closing
+        (tag_open
+          (identifier)
+          (attribute
+            (identifier)
+            (value
+              (primitive
+                (number))))
+          (attribute
+            (identifier)
+            (value
+              (primitive
+                (boolean)))))))
+    (tag_end)))
+
+
+===========
+Closing tag
+===========
+{% /foo %}
+---
+
+(content
+    (tag
+      (tag_start)
+      (tag_interior
+        (tag_close
+          (identifier)))
+      (tag_end)))
+
+
+===================
+Invalid closing tag
+===================
+{% /foo/ %}
+---
+
+(content
+  (tag
+    (tag_start)
+    (tag_interior
+      (tag_close
+        (identifier)))
+    (ERROR)
+    (tag_end)))
+
+===================================
+Invalid closing tag with attributes
+===================================
+{% /foo test=1 %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (ERROR
+          (tag_interior
+            (tag_close
+              (identifier))))
+        (attribute
+          (identifier)
+          (value
+            (primitive
+              (number))))
+        (tag_end)))
