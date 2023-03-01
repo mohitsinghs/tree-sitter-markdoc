@@ -30,10 +30,13 @@
       "type": "PREC_RIGHT",
       "value": 0,
       "content": {
-        "type": "REPEAT1",
+        "type": "TOKEN",
         "content": {
-          "type": "PATTERN",
-          "value": "[^{]|\\{%+"
+          "type": "REPEAT1",
+          "content": {
+            "type": "PATTERN",
+            "value": "[^\\s{][^{]*"
+          }
         }
       }
     },
