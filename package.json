@@ -4,7 +4,8 @@
   "description": "",
   "main": "bindings/node",
   "scripts": {
-    "test": "tree-sitter test"
+    "test": "tree-sitter test",
+    "build": "tree-sitter generate"
   },
   "keywords": [],
   "author": "Mohit Singh <mohit@mohitsingh.in> (https://mohitsingh.in/)",
@@ -19,6 +20,7 @@
     {
       "scope": "source.md",
       "file-types": [
+        "markdown",
         "md"
       ],
       "injections": "queries/injections.scm",
