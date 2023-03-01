@@ -32,8 +32,7 @@ module.exports = grammar({
     annotation: ($) =>
       seq(
         $.tag_start,
-        optional($._space),
-        repeat1($.attribute),
+        repeat1(seq(optional($._space), $.attribute)),
         optional($._space),
         $.tag_end
       ),
@@ -41,8 +40,7 @@ module.exports = grammar({
     interpolation: ($) =>
       seq(
         $.tag_start,
-        optional($._space),
-        choice($.function, $.variable),
+        repeat1(seq($._space, choice($.function, $.variable))),
         optional($._space),
         $.tag_end
       ),
