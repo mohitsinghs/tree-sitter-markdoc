@@ -6,7 +6,7 @@ module.exports = grammar({
   rules: {
     content: ($) =>
       repeat(choice($.tag, $.interpolation, $.annotation, $.markdown)),
-    markdown: ($) => prec.right(repeat1(/[^{]|\{%+/)),
+    markdown: ($) => prec.right(token(repeat1(/[^\s{][^{]*/))),
     // tags
     tag: ($) => seq($.tag_start, optional($._space), $.tag_interior, $.tag_end),
     tag_start: ($) => '{%',
