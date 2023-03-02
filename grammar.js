@@ -24,8 +24,7 @@ module.exports = grammar({
 
     // attributes
     attribute: ($) => choice($._attribute_full, $._attribute_shorthand),
-    _attribute_full: ($) =>
-      seq(field('key', $.identifier), '=', field('value', $.value)),
+    _attribute_full: ($) => seq(field('key', $.identifier), '=', $.value),
     _attribute_shorthand: ($) => seq($._shorthand_sigil, $.identifier),
     _shorthand_sigil: ($) => choice('.', '#'),
 
@@ -84,25 +83,42 @@ module.exports = grammar({
         '}'
       ),
     _hash_item: ($) => prec(1, seq($._hash_key_value, ',')),
-    _hash_key_value: ($) =>
-      seq(field('key', $.hash_key), ':', field('value', $.value)),
+    _hash_key_value: ($) => seq($.hash_key, ':', $.value),
     _hash_item_with_optional_comma: ($) =>
       seq($._hash_key_value, optional(',')),
-    hash_key: ($) => choice($.identifier, $.string),
+    hash_key: ($) => choice(field('key', $.identifier), $.string),
     // variable
     variable: ($) =>
-      prec.right(seq($.variable_sigil, $.identifier, repeat($.variable_tail))),
+      prec.right(
+        seq(
+          $.variable_sigil,
+          field('variable', $.identifier),
+          repeat($.variable_tail)
+        )
+      ),
     variable_tail: ($) =>
-      choice(seq('.', $.identifier), seq('[', $.variable_segment_value, ']')),
+      choice(
+        seq('.', field('property', $.identifier)),
+        seq('[', $.variable_segment_value, ']')
+      ),
     variable_segment_value: ($) => choice($.number, $.string, $.variable),
     variable_sigil: ($) => choice('$', '@'),
     // functiion
     function: ($) =>
-      prec.right(1, seq($.identifier, '(', repeat($.function_parameters), ')')),
+      prec.right(
+        1,
+        seq(
+          field('function_name', $.identifier),
+          '(',
+          repeat($.function_parameters),
+          ')'
+        )
+      ),
     function_parameters: ($) => seq($.value, repeat($.function_parameter_tail)),
     function_parameter_tail: ($) => seq(',', $.function_parameter),
     function_parameter: ($) => choice($.function_parameter_named, $.value),
-    function_parameter_named: ($) => seq($.identifier, '=', $.value),
+    function_parameter_named: ($) =>
+      seq(field('parameter', $.identifier), '=', $.value),
 
     // identifier
     identifier: ($) => {
