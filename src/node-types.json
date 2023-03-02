@@ -50,16 +50,30 @@
             "named": true
           }
         ]
+      },
+      "shorthand": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "#",
+            "named": false
+          },
+          {
+            "type": ".",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
         {
           "type": "value",
           "named": true

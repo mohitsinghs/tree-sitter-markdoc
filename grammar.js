@@ -25,7 +25,8 @@ module.exports = grammar({
     // attributes
     attribute: ($) => choice($._attribute_full, $._attribute_shorthand),
     _attribute_full: ($) => seq(field('key', $.identifier), '=', $.value),
-    _attribute_shorthand: ($) => seq($._shorthand_sigil, $.identifier),
+    _attribute_shorthand: ($) =>
+      field('shorthand', seq($._shorthand_sigil, $.identifier)),
     _shorthand_sigil: ($) => choice('.', '#'),
 
     annotation: ($) =>

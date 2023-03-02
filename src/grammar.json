@@ -221,17 +221,21 @@
       ]
     },
     "_attribute_shorthand": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_shorthand_sigil"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        }
-      ]
+      "type": "FIELD",
+      "name": "shorthand",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_shorthand_sigil"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        ]
+      }
     },
     "_shorthand_sigil": {
       "type": "CHOICE",
