@@ -1,0 +1,366 @@
+=========================
+Simple hash literal value
+=========================
+{% foo={bar: true} %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (compound
+              (hash
+                (hash_key
+                  (identifier))
+                (value
+                  (primitive
+                    (boolean)))))))
+        (tag_end)))
+
+=========================
+Nested hash literal value
+=========================
+{% foo={bar: true, baz: {test: "this is a test"}} %}
+{% foo={bar:true,baz:{test:"this is a test"}} %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (compound
+              (hash
+                (hash_key
+                  (identifier))
+                (value
+                  (primitive
+                    (boolean)))
+                (hash_key
+                  (identifier))
+                (value
+                  (compound
+                    (hash
+                      (hash_key
+                        (identifier))
+                      (value
+                        (primitive
+                          (string))))))))))
+        (tag_end))
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (compound
+              (hash
+                (hash_key
+                  (identifier))
+                (value
+                  (primitive
+                    (boolean)))
+                (hash_key
+                  (identifier))
+                (value
+                  (compound
+                    (hash
+                      (hash_key
+                        (identifier))
+                      (value
+                        (primitive
+                          (string))))))))))
+        (tag_end)))
+
+================================
+Hash literal that has string key
+================================
+{% foo={bar: true, "baz": 1} %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (compound
+              (hash
+                (hash_key
+                  (identifier))
+                (value
+                  (primitive
+                    (boolean)))
+                (hash_key
+                  (string))
+                (value
+                  (primitive
+                    (number)))))))
+        (tag_end)))
+
+===========================
+Multiple hash literal value
+===========================
+{% foo={bar: true} baz={test: "testing"} %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (compound
+              (hash
+                (hash_key
+                  (identifier))
+                (value
+                  (primitive
+                    (boolean)))))))
+        (attribute
+          (identifier)
+          (value
+            (compound
+              (hash
+                (hash_key
+                  (identifier))
+                (value
+                  (primitive
+                    (string)))))))
+        (tag_end)))
+
+===================
+Array literal value
+===================
+{% foo=[1, 2, 3] %}
+{% foo=[1,2,3] %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (compound
+              (array
+                (value
+                  (primitive
+                    (number)))
+                (value
+                  (primitive
+                    (number)))
+                (value
+                  (primitive
+                    (number)))))))
+        (tag_end))
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (compound
+              (array
+                (value
+                  (primitive
+                    (number)))
+                (value
+                  (primitive
+                    (number)))
+                (value
+                  (primitive
+                    (number)))))))
+        (tag_end)))
+
+===========================
+Nested array literal values
+===========================
+{% foo=[1, 2, ["test", true, null]] %}
+{% foo=[1,2,["test",true,null]] %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (compound
+              (array
+                (value
+                  (primitive
+                    (number)))
+                (value
+                  (primitive
+                    (number)))
+                (value
+                  (compound
+                    (array
+                      (value
+                        (primitive
+                          (string)))
+                      (value
+                        (primitive
+                          (boolean)))
+                      (value
+                        (primitive
+                          (null))))))))))
+        (tag_end))
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (compound
+              (array
+                (value
+                  (primitive
+                    (number)))
+                (value
+                  (primitive
+                    (number)))
+                (value
+                  (compound
+                    (array
+                      (value
+                        (primitive
+                          (string)))
+                      (value
+                        (primitive
+                          (boolean)))
+                      (value
+                        (primitive
+                          (null))))))))))
+        (tag_end)))
+
+====================================
+Multiple nested array literal values
+====================================
+{% foo=[1, 2, ["test", true, null]] bar=["baz"] %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (compound
+              (array
+                (value
+                  (primitive
+                    (number)))
+                (value
+                  (primitive
+                    (number)))
+                (value
+                  (compound
+                    (array
+                      (value
+                        (primitive
+                          (string)))
+                      (value
+                        (primitive
+                          (boolean)))
+                      (value
+                        (primitive
+                          (null))))))))))
+        (attribute
+          (identifier)
+          (value
+            (compound
+              (array
+                (value
+                  (primitive
+                    (string)))))))
+        (tag_end)))
+
+=========================
+Array and object literals
+=========================
+{% foo=[1, 2, {bar: "baz", test: [1, 2, 3]}] %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (compound
+              (array
+                (value
+                  (primitive
+                    (number)))
+                (value
+                  (primitive
+                    (number)))
+                (value
+                  (compound
+                    (hash
+                      (hash_key
+                        (identifier))
+                      (value
+                        (primitive
+                          (string)))
+                      (hash_key
+                        (identifier))
+                      (value
+                        (compound
+                          (array
+                            (value
+                              (primitive
+                                (number)))
+                            (value
+                              (primitive
+                                (number)))
+                            (value
+                              (primitive
+                                (number)))))))))))))
+        (tag_end)))
+
+=============
+Invalid value
+=============
+{% 'foo=bar' %}
+{% 'foo=a1' %}
+{% 'foo=1a' %}
+---
+(content
+      (tag
+        (tag_start)
+        (ERROR
+          (UNEXPECTED '''))
+        (tag_interior
+          (tag_open
+            (identifier)
+            (ERROR
+              (identifier)
+              (UNEXPECTED '''))))
+        (tag_end))
+      (tag
+        (tag_start)
+        (ERROR
+          (UNEXPECTED '''))
+        (tag_interior
+          (tag_open
+            (identifier)
+            (ERROR
+              (identifier)
+              (UNEXPECTED '''))))
+        (tag_end))
+      (annotation
+        (tag_start)
+        (ERROR
+          (UNEXPECTED '''))
+        (attribute
+          (identifier)
+          (value
+            (primitive
+              (number))))
+        (ERROR
+          (identifier)
+          (UNEXPECTED '''))
+        (tag_end)))

@@ -1,0 +1,182 @@
+================
+Single attribute
+================
+{% test=1 %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (primitive
+              (number))))
+        (tag_end)))
+
+=========
+Single Id
+=========
+{% #test %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier))
+        (tag_end)))
+
+=======
+Hyphens
+=======
+{% #test-1 .foo-bar %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier))
+        (attribute
+          (identifier))
+        (tag_end)))
+
+===============
+Chained classes
+===============
+{% .foo .bar %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier))
+        (attribute
+          (identifier))
+        (tag_end)))
+
+======================
+Chained id and classes
+======================
+{% #test-1 .foo .bar %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier))
+        (attribute
+          (identifier))
+        (attribute
+          (identifier))
+        (tag_end)))
+
+==========
+Invalid id
+==========
+{% #foo@bar.baz@test %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier))
+        (ERROR
+          (identifier))
+        (attribute
+          (identifier))
+        (ERROR
+          (identifier))
+        (tag_end)))
+
+===============
+Key/value pairs
+===============
+{% foo="bar" baz=3 test=true %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (primitive
+              (string))))
+        (attribute
+          (identifier)
+          (value
+            (primitive
+              (number))))
+        (attribute
+          (identifier)
+          (value
+            (primitive
+              (boolean))))
+        (tag_end)))
+
+=============================
+Shortcuts and key/value pairs
+=============================
+{% #foo .bar test="asdf" %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier))
+        (attribute
+          (identifier))
+        (attribute
+          (identifier)
+          (value
+            (primitive
+              (string))))
+        (tag_end)))
+
+=======================
+Boolean key/value pairs
+=======================
+{% test=true foo=false bar=true %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (primitive
+              (boolean))))
+        (attribute
+          (identifier)
+          (value
+            (primitive
+              (boolean))))
+        (attribute
+          (identifier)
+          (value
+            (primitive
+              (boolean))))
+        (tag_end)))
+
+===================
+Null key/value pair
+===================
+{% foo=null %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (primitive
+              (null))))
+        (tag_end)))

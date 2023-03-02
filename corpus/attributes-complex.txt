@@ -1,0 +1,132 @@
+===============
+Simple variable
+===============
+{% test=$foo %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (variable
+              (variable_sigil)
+              (identifier))))
+        (tag_end)))
+
+========================
+Multiple levels of depth
+========================
+{% test=$foo.bar.baz %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (variable
+              (variable_sigil)
+              (identifier)
+              (variable_tail
+                (identifier))
+              (variable_tail
+                (identifier)))))
+        (tag_end)))
+
+===========
+Array index
+===========
+{% test=$foo[1] %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (variable
+              (variable_sigil)
+              (identifier)
+              (variable_tail
+                (variable_segment_value
+                  (number))))))
+        (tag_end)))
+
+======================
+Multiple array indexes
+======================
+{% test=$foo[1][2] %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (variable
+              (variable_sigil)
+              (identifier)
+              (variable_tail
+                (variable_segment_value
+                  (number)))
+              (variable_tail
+                (variable_segment_value
+                  (number))))))
+        (tag_end)))
+
+============================
+Array indexes and properties
+============================
+{% test=$foo[1].bar.baz[2].test %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (variable
+              (variable_sigil)
+              (identifier)
+              (variable_tail
+                (variable_segment_value
+                  (number)))
+              (variable_tail
+                (identifier))
+              (variable_tail
+                (identifier))
+              (variable_tail
+                (variable_segment_value
+                  (number)))
+              (variable_tail
+                (identifier)))))
+        (tag_end)))
+
+===================
+Invalid array index
+===================
+{% test=$foo[asdf] %}
+---
+
+(content
+      (annotation
+        (tag_start)
+        (attribute
+          (identifier)
+          (value
+            (variable
+              (variable_sigil)
+              (identifier)
+              (variable_tail
+                (variable_segment_value
+                  (variable
+                    (variable_sigil
+                      (MISSING "$"))
+                    (identifier)))))))
+        (tag_end)))
