@@ -1,1 +1,1 @@
-(markdown) @markdown @combind
+(markdown) @markdown
