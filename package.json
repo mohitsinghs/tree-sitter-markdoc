@@ -18,12 +18,10 @@
   },
   "tree-sitter": [
     {
-      "scope": "source.md",
+      "scope": "text.markdoc",
       "file-types": [
-        "markdown",
-        "md"
+        "markdoc"
       ],
-      "injections": "queries/injections.scm",
       "injection-regex": "markdoc"
     }
   ]
