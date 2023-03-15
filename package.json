@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "Mohit Singh <mohit@mohitsingh.in> (https://mohitsingh.in/)",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "nan": "^2.17.0"
   },
