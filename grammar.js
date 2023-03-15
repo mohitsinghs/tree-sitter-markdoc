@@ -7,6 +7,7 @@ module.exports = grammar({
     content: ($) =>
       repeat(choice($.tag, $.interpolation, $.annotation, $.markdown)),
     markdown: ($) => prec.right(token(repeat1(/[^\s{][^{]*/))),
+
     // tags
     tag: ($) => seq($.tag_start, optional($._space), $.tag_interior, $.tag_end),
     tag_start: ($) => '{%',
@@ -29,6 +30,7 @@ module.exports = grammar({
       field('shorthand', seq($._shorthand_sigil, $.identifier)),
     _shorthand_sigil: ($) => choice('.', '#'),
 
+    // annotations
     annotation: ($) =>
       seq(
         $.tag_start,
@@ -37,6 +39,7 @@ module.exports = grammar({
         $.tag_end
       ),
 
+    // interpolation
     interpolation: ($) =>
       seq(
         $.tag_start,
@@ -48,6 +51,7 @@ module.exports = grammar({
 
     // values
     value: ($) => choice($.primitive, $.compound, $.variable, $.function),
+
     // primitives
     primitive: ($) => choice($.null, $.boolean, $.number, $.string),
     null: ($) => 'null',
@@ -56,6 +60,7 @@ module.exports = grammar({
       const digit = /\d+/
       return token(seq(optional('-'), digit, optional(seq('.', digit))))
     },
+
     // string
     string: ($) => seq('"', repeat($._string_element), '"'),
     _string_element: ($) =>
@@ -63,8 +68,10 @@ module.exports = grammar({
     _string_character: ($) => token.immediate(prec(1, /[^"\\]/)),
     _string_escape_sequence: ($) =>
       token.immediate(seq('\\', choice('n', 'r', 't', '\\', '"'))),
+
     // compound
     compound: ($) => choice($.array, $.hash),
+
     // array
     array: ($) =>
       seq(
@@ -75,6 +82,7 @@ module.exports = grammar({
       ),
     _array_item: ($) => prec(1, seq($.value, ',')),
     _array_item_with_optional_comma: ($) => seq($.value, optional(',')),
+
     // hash
     hash: ($) =>
       seq(
@@ -88,6 +96,7 @@ module.exports = grammar({
     _hash_item_with_optional_comma: ($) =>
       seq($._hash_key_value, optional(',')),
     hash_key: ($) => choice(field('key', $.identifier), $.string),
+
     // variable
     variable: ($) =>
       prec.right(
@@ -104,7 +113,8 @@ module.exports = grammar({
       ),
     variable_segment_value: ($) => choice($.number, $.string, $.variable),
     variable_sigil: ($) => choice('$', '@'),
-    // functiion
+
+    // function
     function: ($) =>
       prec.right(
         1,
