@@ -1,10 +1,17 @@
-# tree-sitter-markdoc
+<h1 align='center'>tree-sitter-markdoc</h1>
+<p align='center'>
+  <a href="https://github.com/markdoc-extra/tree-sitter-markdoc/actions/workflows/ci.yml">
+    <img alt="CI" src="https://img.shields.io/github/actions/workflow/status/markdoc-extra/tree-sitter-markdoc/ci.yml?style=flat-square" />
+  </a>
+  <a href="https://github.com/markdoc-extra/tree-sitter-markdoc/blob/main/LICENSE">
+    <img alt="LICENSE" src="https://img.shields.io/github/license/markdoc-extra/tree-sitter-markdoc?style=flat-square" />
+  </a>
+</p>
+<p align="center">
+  <b>Markdoc grammar for <a href="https://github.com/tree-sitter/tree-sitter">tree-sitter</a></b><br/>
+</p>
 
-[![test](https://github.com/markdoc-extra/tree-sitter-markdoc/actions/workflows/ci.yml/badge.svg)](https://github.com/markdoc-extra/tree-sitter-markdoc/actions/workflows/ci.yml)
-
-Markdoc grammar for [tree-sitter][].
-
-[tree-sitter]: https://github.com/tree-sitter/tree-sitter
+<br />
 
 ## Using with Neovim
 
