@@ -133,7 +133,7 @@ module.exports = grammar({
 
     // identifier
     identifier: ($) => {
-      const identifierTail = /[-_a-zA-Z0-9]/
+      const identifierTail = /[-\w]/
       return token(seq(/[a-zA-Z]/, repeat(identifierTail)))
     },
     _space: ($) => repeat1(choice('\t', ' ', '\n')),
