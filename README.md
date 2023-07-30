@@ -32,7 +32,8 @@ local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 parser_config.markdoc = {
   install_info = {
     url = "https://github.com/markdoc-extra/tree-sitter-markdoc",
-    files = { "src/parser.c" }
+    files = { "src/parser.c" },
+    branch = "main",
    },
   filetype = "markdoc",
 }
