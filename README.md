@@ -1,10 +1,10 @@
 <h1 align='center'>tree-sitter-markdoc</h1>
 <p align='center'>
-  <a href="https://github.com/markdoc-extra/tree-sitter-markdoc/actions/workflows/ci.yml">
-    <img alt="CI" src="https://img.shields.io/github/actions/workflow/status/markdoc-extra/tree-sitter-markdoc/ci.yml?style=flat-square" />
+  <a href="https://github.com/mohitsinghs/tree-sitter-markdoc/actions/workflows/ci.yml">
+    <img alt="CI" src="https://img.shields.io/github/actions/workflow/status/mohitsinghs/tree-sitter-markdoc/ci.yml?style=flat-square" />
   </a>
-  <a href="https://github.com/markdoc-extra/tree-sitter-markdoc/blob/main/LICENSE">
-    <img alt="LICENSE" src="https://img.shields.io/github/license/markdoc-extra/tree-sitter-markdoc?style=flat-square" />
+  <a href="https://github.com/mohitsinghs/tree-sitter-markdoc/blob/main/LICENSE">
+    <img alt="LICENSE" src="https://img.shields.io/github/license/mohitsinghs/tree-sitter-markdoc?style=flat-square" />
   </a>
 </p>
 <p align="center">
@@ -31,7 +31,7 @@ vim.filetype.add({
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 parser_config.markdoc = {
   install_info = {
-    url = "https://github.com/markdoc-extra/tree-sitter-markdoc",
+    url = "https://github.com/mohitsinghs/tree-sitter-markdoc",
     files = { "src/parser.c" },
     branch = "main",
    },
